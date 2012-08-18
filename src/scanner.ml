@@ -86,6 +86,7 @@ let rec main_scanner nlines = lexer
 	| "@media" space+		-> (add_lines nlines lexbuf, MEDIA)
 	| "@page" space+		-> (add_lines nlines lexbuf, PAGE)
 	| "@font-face" space+		-> (add_lines nlines lexbuf, FONTFACE)
+	| "@extend" space+		-> (add_lines nlines lexbuf, EXTEND)
 	| space* "!important" space*	-> (nlines, IMPORTANT)
 	| space* "/*"			-> comment_scanner nlines lexbuf
 	| space* slc space*		-> main_scanner (add_lines nlines lexbuf) lexbuf

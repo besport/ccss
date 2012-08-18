@@ -201,8 +201,11 @@ let sprint convert stylesheet =
 		| `Attr_suffix v    -> "$=" ^ "\"" ^ v ^ "\""
 		| `Attr_substring v -> "*=" ^ "\"" ^ v ^ "\""
 
-	and sprint_declaration (property, expression, important) =
-		sprintf "\t%s: %s%s;" property (sprint_expression expression) (if important then " !important" else "")
+	and sprint_declaration = function
+	`Leaf (property, expression, important) ->
+	  sprintf "\t%s: %s%s;" property (sprint_expression expression) (if important then " !important" else "")
+	  | `Node n -> sprint_rule n
+	  | `Extra _ -> ""
 
 	and sprint_expression expression =
 		sprint_list ~sep:", " sprint_sentence expression

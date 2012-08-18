@@ -96,7 +96,12 @@ and attr_t =
 (**	{2 Declarations}							*)
 (********************************************************************************)
 
-and declaration_t = property_t * expression_t * important_t
+and declaration_t =
+  [ `Leaf of property_t * expression_t * important_t
+  | `Node of rule_t
+  | `Extra of extra_t ]
+
+and extra_t = [`Extend of string ]
 
 and property_t = string
 

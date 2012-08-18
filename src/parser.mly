@@ -48,6 +48,7 @@ let nelist = function
 
 %token <Ast.quantity_t> QUANTITY
 
+%token EXTEND
 
 /********************************************************************************/
 /* Associativity and precedence declarations.					*/
@@ -160,8 +161,9 @@ declaration_block:
 	| OPEN_CURLY declaration+ CLOSE_CURLY				{$2}
 
 declaration:
-	| IDENT COLON expr boption(IMPORTANT) SEMICOLON			{($1, $3, $4)}
-
+	| IDENT COLON expr boption(IMPORTANT) SEMICOLON			{`Leaf ($1, $3, $4)}
+	| rule                                                       {`Node $1}
+	| EXTEND PERIOD IDENT SEMICOLON							{`Extra (`Extend $3)}
 expr:
 	| separated_nonempty_list(COMMA, sentence)			{$1}
 

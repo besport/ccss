@@ -49,6 +49,7 @@ let () =
 	in try
 		let lexbuf = Ulexing.from_utf8_channel stdin in
 		let css = menhir_with_ulex Parser.stylesheet lexbuf in
+		let css = Nesting.convert css in
 		let out = Printer.sprint convert css
 		in print_string out
 	with
