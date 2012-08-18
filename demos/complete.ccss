@@ -8,11 +8,11 @@
 @import url("bar");
 @import url("bar") print, screen;
 
-Foo1: 50em;
-Foo2: 10em + 20em;
-Foo3: Foo2 - 5em;
-Foo4: 2;
-Foo5: 2px solid black;
+$Foo1: 50em;
+$Foo2: 10em + 20em;
+$Foo3: $Foo2 - 5em;
+$Foo4: 2;
+$Foo5: 2px solid black;
 
 @media print, screen
 	{
@@ -28,6 +28,11 @@ h1
 	{
 	color: black;
 	background: #fff;
+	span {
+	     color :yellow;
+	     a {color:black;}
+	     }
+	@extend .test1;
 	border: 1px solid black;
 	font-family: "Arial";
 	font: 100%/1.2;
@@ -61,9 +66,9 @@ h1 {width: 5em * 2;}					// Should equal 10em
 h1 {width: 2 * 5em;}					// Should equal 10em
 h1 {width: (10px + 5px + 15px) + (5px + 5px);}		// Should equal 40px
 
-h1 {width: Foo1;}
-h1 {width: Foo2;}
-h1 {width: Foo3;}
-h1 {width: Foo4 * (Foo2 + Foo3);}
-h1 {border: Foo5;}
+h1 {width: $Foo1;}
+h1 {width: $Foo2;}
+h1 {width: $Foo3;}
+h1 {width: $Foo4 * ($Foo2 + $Foo3);}
+h1 {border: $Foo5;}
 
